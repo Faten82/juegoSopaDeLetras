@@ -22,3 +22,7 @@ function seleccionarPalabras() {
         palabras.push(palabrasDisponibles.splice(index, 1)[0]);
     }
 }
+// Inicializar la cuadrícula con letras aleatorias
+function inicializarCuadricula() {
+    grid = Array.from({ length: gridSize }, () => Array(gridSize).fill(''));
+}
