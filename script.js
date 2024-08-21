@@ -12,3 +12,13 @@ const gridSize = 14;
 let grid = [];
 let palabras = [];
 let seleccion = [];
+// Función para seleccionar un subconjunto aleatorio de palabras
+function seleccionarPalabras() {
+    const numPalabras = 10; // Número de palabras a colocar en la sopa de letras
+    palabras = [];
+    const palabrasDisponibles = todasLasPalabras.slice(); // Copia el array usando slice()
+    for (let i = 0; i < numPalabras; i++) {
+        const index = Math.floor(Math.random() * palabrasDisponibles.length);
+        palabras.push(palabrasDisponibles.splice(index, 1)[0]);
+    }
+}
