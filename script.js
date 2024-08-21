@@ -26,3 +26,29 @@ function seleccionarPalabras() {
 function inicializarCuadricula() {
     grid = Array.from({ length: gridSize }, () => Array(gridSize).fill(''));
 }
+
+// Función para colocar una palabra en la cuadrícula// FATEN //
+function colocarPalabraEnCuadricula(palabra) {
+    let colocado = false;
+    while (!colocado) {
+        const orientacion = Math.floor(Math.random() * 2); // 0: horizontal, 1: vertical
+        const fila = Math.floor(Math.random() * gridSize);
+        const columna = Math.floor(Math.random() * gridSize);
+
+        if (orientacion === 0 && columna + palabra.length <= gridSize) { // Horizontal
+            if (puedeColocarHorizontal(fila, columna, palabra)) {
+                for (let i = 0; i < palabra.length; i++) {
+                    grid[fila][columna + i] = palabra[i];
+                }
+                colocado = true;
+            }
+        } else if (orientacion === 1 && fila + palabra.length <= gridSize) { // Vertical
+            if (puedeColocarVertical(fila, columna, palabra)) {
+                for (let i = 0; i < palabra.length; i++) {
+                    grid[fila + i][columna] = palabra[i];
+                }
+                colocado = true;
+            }
+        }
+    }
+}
