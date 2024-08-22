@@ -52,3 +52,30 @@ function colocarPalabraEnCuadricula(palabra) {
         }
     }
 }
+// Initialize empty grid
+for (let i = 0; i < gridSize; i++) {
+    grid[i] = [];
+    for (let j = 0; j < gridSize; j++) {
+        grid[i][j] = '';
+    }
+}
+
+// Function to place a word in the grid
+function placeWord(word) {
+    let direction = Math.floor(Math.random() * 2); // 0 for horizontal, 1 for vertical
+    let row, col;
+    
+    if (direction === 0) {
+        row = Math.floor(Math.random() * gridSize);
+        col = Math.floor(Math.random() * (gridSize - word.length + 1));
+        for (let i = 0; i < word.length; i++) {
+            grid[row][col + i] = word[i];
+        }
+    } else {
+        row = Math.floor(Math.random() * (gridSize - word.length + 1));
+        col = Math.floor(Math.random() * gridSize);
+        for (let i = 0; i < word.length; i++) {
+            grid[row + i][col] = word[i];
+        }
+    }
+}
