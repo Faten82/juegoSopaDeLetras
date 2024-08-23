@@ -31,7 +31,7 @@ function inicializarCuadricula() {
 function colocarPalabraEnCuadricula(palabra) {
     let colocado = false;
     while (!colocado) {
-        const orientacion = Math.floor(Math.random() * 2); // 0: horizontal, 1: vertical
+        const orientacion = Math.floor(Math.random() * 2); // 0: horizontal, 1: vertical, 2: diagonal ascendente, 3: diagonal descendente
         const fila = Math.floor(Math.random() * gridSize);
         const columna = Math.floor(Math.random() * gridSize);
 
@@ -40,17 +40,30 @@ function colocarPalabraEnCuadricula(palabra) {
                 for (let i = 0; i < palabra.length; i++) {
                     grid[fila][columna + i] = palabra[i];
                 }
-                colocado = true;
-            }
         } else if (orientacion === 1 && fila + palabra.length <= gridSize) { // Vertical
             if (puedeColocarVertical(fila, columna, palabra)) {
                 for (let i = 0; i < palabra.length; i++) {
                     grid[fila + i][columna] = palabra[i];
                 }
-                colocado = true;
+       } else if (orientacion === 2) { // Diagonal Descendente
+                for (let i = 0; i < palabra.length; i++) {
+                    grid[fila + i][columna + i] = palabra[i];
+                }
+            } else if (orientacion === 3) { // Diagonal Ascendente
+                for (let i = 0; i < palabra.length; i++) {
+                    grid[fila - i][columna + i] = palabra[i];
+                }
+            }
+            colocado = true;
             }
         }
     }
+    
+// Función para colocar todas las palabras en la cuadrícula
+function colocarPalabras() {
+    palabras.forEach(palabra => {
+        colocarPalabraEnCuadricula(palabra);
+    });
 }
 // Initialize empty grid
 for (let i = 0; i < gridSize; i++) {
@@ -59,23 +72,12 @@ for (let i = 0; i < gridSize; i++) {
         grid[i][j] = '';
     }
 }
+// Añadir evento al botón "Rendirse"
+document.getElementById('botonRendirse').addEventListener('click', () => {
+    mostrarPalabrasOcultas();
+});
 
-// Function to place a word in the grid
-function placeWord(word) {
-    let direction = Math.floor(Math.random() * 2); // 0 for horizontal, 1 for vertical
-    let row, col;
-    
-    if (direction === 0) {
-        row = Math.floor(Math.random() * gridSize);
-        col = Math.floor(Math.random() * (gridSize - word.length + 1));
-        for (let i = 0; i < word.length; i++) {
-            grid[row][col + i] = word[i];
-        }
-    } else {
-        row = Math.floor(Math.random() * (gridSize - word.length + 1));
-        col = Math.floor(Math.random() * gridSize);
-        for (let i = 0; i < word.length; i++) {
-            grid[row + i][col] = word[i];
-        }
-    }
-}
+document.getElementById('botonReiniciar').addEventListener('click', () => {
+    document.getElementById('palabrasOcultas').style.display = 'none'; // Ocultar palabras ocultas
+    inicializarJuego(); // Reiniciar el juego
+});
