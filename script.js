@@ -81,3 +81,12 @@ document.getElementById('botonReiniciar').addEventListener('click', () => {
     document.getElementById('palabrasOcultas').style.display = 'none'; // Ocultar palabras ocultas
     inicializarJuego(); // Reiniciar el juego
 });
+
+    // Llenar las celdas vacías restantes con letras aleatorias--Faten//
+for (let i = 0; i < tamañoCuadricula; i++) {
+    for (let j = 0; j < tamañoCuadricula; j++) {
+        if (cuadricula[i][j] === '') {
+            cuadricula[i][j] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+        }
+    }
+}
