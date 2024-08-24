@@ -90,3 +90,23 @@ for (let i = 0; i < tamañoCuadricula; i++) {
         }
     }
 }
+      // Mostrar la cuadrícula
+    const gridElement = document.getElementById('grid');
+    gridElement.innerHTML = '';
+    for (let i = 0; i < gridSize; i++) {
+        for (let j = 0; j < gridSize; j++) {
+            const cell = document.createElement('div');
+            cell.id = `cell-${i}-${j}`;
+            cell.className = 'cell';
+            cell.textContent = grid[i][j];
+            cell.addEventListener('click', () => seleccionarCelda(i, j));
+            gridElement.appendChild(cell);
+        }
+    }
+}
+
+// Ejecutar inicialización cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', () => {
+    inicializarJuego();
+});
+    
