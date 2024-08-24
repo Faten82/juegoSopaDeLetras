@@ -90,6 +90,20 @@ for (let i = 0; i < tamañoCuadricula; i++) {
         }
     }
 }
+    // Inicializar el juego
+function inicializarJuego() {
+    seleccionarPalabras();
+    inicializarCuadricula();
+    colocarPalabras();
+
+    // Completar el grid con letras aleatorias en espacios vacíos
+    for (let i = 0; i < gridSize; i++) {
+        for (let j = 0; j < gridSize; j++) {
+            if (grid[i][j] === '') {
+                grid[i][j] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+            }
+        }
+    }
       // Mostrar la cuadrícula
     const gridElement = document.getElementById('grid');
     gridElement.innerHTML = '';
